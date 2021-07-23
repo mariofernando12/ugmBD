@@ -37,6 +37,7 @@ class ImeiautorizadoController extends Controller
      */
     public function create()
     {
+        //
         $funcionarios = Funcionario::all();
         $elecciones = Eleccion::all();
         $casillas = Casilla::all();
@@ -54,6 +55,7 @@ class ImeiautorizadoController extends Controller
      */
     public function store(Request $request)
     {
+        //
         $request->validate([
             'funcionario_id' => 'required',
             'casilla_id' => 'required',
@@ -107,15 +109,17 @@ class ImeiautorizadoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //
         $request->validate([
             'id' => 'required',
             'funcionario_id' => 'required',
             'casilla_id' => 'required',
             'eleccion_id' => 'required',
-            'imei' => 'required|max:20'
+            'imei' => 'required|max:20',
         ]);
 
-        $data = ["id" => $request->id, "funcionario_id" => $request->funcionario_id,"casilla_id" => $request->casilla_id, "eleccion_id" => $request->eleccion_id, "imei" => $request->imei ];
+        $data=["id" => $request->id, "funcionario_id" => $request->funcionario_id, "casilla_id" => $request->casilla_id,
+        "eleccion_id" => $request->eleccion_id, "imei" => $request->imei];
         Imeiautorizado::whereId($id)->update($data);
         return redirect('imeiautorizado')
             ->with('success', 'Actualizado correctamente...');
@@ -129,6 +133,7 @@ class ImeiautorizadoController extends Controller
      */
     public function destroy($id)
     {
+        //
         $imeiautorizado = Imeiautorizado::find($id);
         $imeiautorizado->delete();
         return redirect('imeiautorizado');
